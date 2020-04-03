@@ -1,30 +1,53 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+// import Index from "../views/Index.vue";
+// import Home from "../views/Home.vue";
+const Index = () => import('@/views/Index.vue')
+const Home = () => import('@/views/Home.vue')
+const watchDetail = () => import('@/views/watchDetail.vue')
+const swipeDetail = () => import('@/views/swipeDetail.vue')
+const topDetail = () => import('@/views/topDetail.vue')
+const category = () => import('@/views/category.vue')
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "home",
+    path: '/',
+    name: 'Index',
+    component: Index
+  },
+  {
+    path: '/home',
+    name: 'Home',
     component: Home
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    path: '/watchDetail',
+    name: '快报详情',
+    component: watchDetail
+  },
+  {
+    path: '/swipeDetail',
+    name: '轮播图详情',
+    component: swipeDetail
+  },
+  {
+    path: '/topDetail',
+    name: 'index顶部',
+    component: topDetail
+  },
+  {
+    path: '/category',
+    name: '分类',
+    component: category
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "hash",
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router //导出router main.js引用
