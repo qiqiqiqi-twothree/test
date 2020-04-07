@@ -74,6 +74,7 @@ export default {
 
   mounted() {},
   created() {
+    // this.map();
     this.$api
       .get(getFloorList, {
         params: {
@@ -96,7 +97,12 @@ export default {
     },
     search() {
       Toast('你好呀')
-    }
+    },
+    // map(array, func) {
+    //   var res = []
+    //   for (var i = 0; i < array.length; i++) 
+    //   res.push(func(array[i]))
+    // }
   }
 }
 </script>
@@ -147,7 +153,7 @@ export default {
       .text {
         display: block;
         position: relative;
-        top: -22px;
+        top: -20px;
         left: 35px;
       }
       // span {

@@ -267,6 +267,7 @@
 </template>
 
 <script>
+import { getRecShopList } from '@/http/mock.js'
 export default {
   data() {
     return {
@@ -299,6 +300,16 @@ export default {
     }
   },
   created() {
+    this.$api
+      .get(getRecShopList, {
+        params: {
+          pageType: 0
+        }
+      })
+      .then(res => {
+        console.log(res, 111)
+      })
+
     this.blockPercent = 3 / 9
     this.$nextTick(() => {
       //   if (this.hotGoods.length > 3) {

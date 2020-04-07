@@ -1,117 +1,109 @@
 <template lang="html">
-  <div>
-    <aside class="aside">
-      <div class="aside-content">
-        <ul>
-          <li
-            v-for="(item, index) in datas"
-            :key="index"
-            @click="changeTable(item.id, index)"
-            :class="{ active: cid ? clid == item.id : index == tabIndex }"
-          >
-            <a :class="{ tips: cid ? clid == item.id : index == tabIndex }">
-              {{ item.cname }}
-            </a>
-          </li>
-        </ul>
+  <div class="main">
+    <div class="flbanner" v-if="datas.advertisementData">
+      <a :href="datas.advertisementData.adURL">
+        <!-- <img
+          :src="datas.advertisementData.adSrc | url"
+          :alt="1"
+          v-if="datas.advertisementData.adSrc"
+        /> -->
+      </a>
+    </div>
+
+    <div
+      class="classify_product"
+      v-for="(item, index) in datas.childData"
+      :key="index"
+    >
+      <div class="cp-title">
+        <span>{{ item.name }}</span>
       </div>
-    </aside>
+      <ul>
+        <li v-for="(item2, index) in item.categoryList" :key="index">
+          <!-- <img :src="item2.picUrl | url" :alt="item2.name" /> -->
+          <p>{{ item2.cname }}</p>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
-import { Toast } from 'vant'
-import { getCategoryList } from '@/http/mock.js'
+// import { pic_url } from '@/http/mock.js'
+
 export default {
-  name: 'index',
+  props: ['datas'],
+
   data() {
-    return {
-      tabIndex: 0,
-      clid: 0,
-      datas: []
-    }
-  },
-  computed: {
-    cid() {
-      // let cid = this.$router.query.id || this.id
-      let clid = 0
-      let that = this
-      this.datas.forEach((item, index) => {
-        if (item.id == clid) {
-          that.tabIndex = index
-        }
-      })
-      return clid
-    }
+    return {}
   },
   mounted() {},
   created() {
-    Toast('*欢迎进入类目栏*')
-    this.$api.post(getCategoryList).then(res => {
-      console.log(res, 123)
-      if (res.data.code == 200) {
-        this.datas = res.data.result
-      }
-    })
-  },
-  methods: {
-    changeTable(cid, index) {
-      if (this.tabIndex === index) return
-      this.tabIndex = index
-      this.clid = cid
-    }
+    console.log(this.datas)
   }
 }
 </script>
 <style scoped lang="less">
-.aside {
-  width: 100px;
-  background: rgba(255, 255, 255, 1);
-  height: auto;
+.main {
+  width: 265px;
+  background-color: #fafafa;
+  // margin: 11px 10px 8px 11px;
+  // padding: 1%;
+  padding: 11px 11px 58px 11px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.main .flbanner {
+  width: 100%;
+}
+.flbanner {
+}
+.main .flbanner a {
+  display: block;
+  // width: 256px;
+}
+.main .flbanner img {
+  width: 100%;
+  height: 60px;
+  border-radius: 4px;
+}
+.classify_product {
+  // margin: 7px 7px 7px 7px;
+  margin: 10px 0;
+  background: #ffffff;
+  border-radius: 5px;
+  border-radius: 4px;
+}
+.cp_title {
+  font-size: 16px;
+  color: #232326;
+  padding-top: 5px;
+  padding-left: 10px;
+  position: relative;
+  padding-bottom: 1px;
+  background: #ffffff;
+}
+.classify_product ul {
+  width: 100%;
+  margin-top: 9px;
+}
+.classify_product ul li {
+  width: 31%;
+  text-align: center;
+  display: inline-block;
+  background: #ffffff;
+  // margin: 1%;
+}
+.classify_product ul li img {
+  width: 74px;
+  height: 74px;
+}
+.classify_product ul li p {
+  font-size: 12px;
+  color: #686868;
   overflow: hidden;
-  .aside-content {
-    padding: 10px 0;
-    width: 70px;
-
-    position: absolute;
-    overflow: hidden;
-    ul {
-      padding: 0 0 10px 0;
-      background-color: #fff;
-      display: block;
-      overflow: hidden;
-    }
-    ul li {
-      padding: 3px 5px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-      white-space: nowrap; /*超出的空白区域不换行*/
-      overflow: hidden; /*超出隐藏*/
-      height: 32px;
-      font-size: 14px;
-      font-family: PingFangSC-Regular, PingFang SC;
-      font-weight: 400;
-      color: rgba(90, 90, 90, 1);
-      line-height: 32px;
-    }
-  }
-  .aside-content a {
-    display: block;
-  }
-}
-.aside ul li .active {
-  font-size: 15px;
-  // color: rgba(255, 77, 79, 1);
-}
-.aside ul li .tips {
-  color: #fff;
-  background-color: rgba(255, 77, 79, 1);
-  width: 60px;
-  height: 24px;
-  line-height: 24px;
-  margin: 11px auto;
-  border-radius: 10px;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 25px;
+  height: 25px;
 }
 </style>

@@ -1,8 +1,13 @@
 <template>
   <div class="notice-wrapper">
     <div class="notice">
-      <van-icon name="comment" color="#FF5C67" size="22" />
-      <div class="notice-title">快报</div>
+      <!-- <van-icon name="volume-o" color="#FF5C67" size="22" /> -->
+      <!-- <van-icon name="comment" color="#FF5C67" size="22" /> -->
+      <!-- <div class="notice-title">快报</div> -->
+      <div class="notice-img">
+        <img src="../assets/news@2x.png" />
+      </div>
+
       <div class="notice-info">
         <div class="notice-info-new">最新</div>
         <div class="notice-info-detail">{{ newNotice }}</div>

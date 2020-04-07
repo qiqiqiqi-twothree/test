@@ -7,7 +7,7 @@ const Home = () => import('@/views/Home.vue')
 const watchDetail = () => import('@/views/watchDetail.vue')
 const swipeDetail = () => import('@/views/swipeDetail.vue')
 const topDetail = () => import('@/views/topDetail.vue')
-const category = () => import('@/views/category.vue')
+const category = () => import('@/views/category.vue') //分类
 
 Vue.use(VueRouter)
 

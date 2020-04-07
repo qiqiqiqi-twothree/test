@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import Api from '@/http/api'
+import axios from 'axios'
 
+Vue.prototype.$axios = axios
 // import config from '@/config'
 // Vue.prototype.$appConfig = config
 Vue.use(Api)
@@ -17,7 +19,7 @@ Vue.config.productionTip = false
 Vue.prototype.name = 'zhangyaqi'
 
 // 全局样式
-// import './src/assets/css/style.less'
+import '@/assets/css/style.css'
 
 // vant
 import Vant from 'vant'
@@ -90,17 +92,17 @@ new Vue({
 //   console.log(res,1111)
 // })
 
-  // //封装request模块
-  // import { request } from './network/request'
-  // request({
-  //   url: 'home/multidata'
-  // })
-  //   .then(res => {
-  //     console.log(res, 111)
-  //   })
-  //   .catch(err => {
-  //     console.log(err, 222)
-  //   })
+// //封装request模块
+// import { request } from './network/request'
+// request({
+//   url: 'home/multidata'
+// })
+//   .then(res => {
+//     console.log(res, 111)
+//   })
+//   .catch(err => {
+//     console.log(err, 222)
+//   })
 
 // request(
 //   {

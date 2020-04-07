@@ -12,12 +12,13 @@ export default {
   data() {
     return {
       repair: {}
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss">
+@import 'assets/css/base.css';
 #app {
   width: 100%;
   height: 100%;

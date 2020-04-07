@@ -1,109 +1,98 @@
 <template lang="html">
   <div class="sdsfd">
-    <v-aside></v-aside>
-    <v-main></v-main>
+    <v-aside
+      :datas="allData"
+      v-if="allData"
+      @tran-form="getData"
+      @index-num="index"
+    ></v-aside>
+    <v-main
+      :datas="{
+        childData: childData,
+        advertisementData: advertisementData,
+        recommendationData: recommendationData
+      }"
+    ></v-main>
   </div>
 </template>
 <script>
+import {
+  getCategoryList,
+  getchildcategoryList,
+  advertisement,
+  recommendation
+} from '@/http/mock.js'
 import { Toast } from 'vant'
-import { getCategoryList } from '@/http/mock.js'
 import Aside from '@/components/category/aside.vue'
 import Main from '@/components/category/main.vue'
+import * as axios from 'axios'
+
 export default {
   components: {
     'v-aside': Aside,
-    'v-main': Main
+    'v-main': Main,
+    [Toast.name]: Toast
   },
 
   data() {
     return {
-      tabIndex: 0,
-      clid: 0,
-      datas: []
+      allData: '',
+      childData: '',
+      advertisementData: [],
+      recommendationData: []
     }
   },
-  computed: {
-    cid() {
-      // let cid = this.$router.query.id || this.id
-      let clid = 0
-      let that = this
-      this.datas.forEach((item, index) => {
-        if (item.id == clid) {
-          that.tabIndex = index
-        }
-      })
-      return clid
-    }
-  },
-  mounted() {},
+  computed: {},
   created() {
     Toast('*欢迎进入类目栏*')
+    let cid = this.$route.query.cid
+    console.log(this.$route, 111)
     this.$api.post(getCategoryList).then(res => {
-      console.log(res, 123)
-      if (res.data.code == 200) {
-        this.datas = res.data.result
-      }
+      this.allData = res.data.result
+      axios
+        .all([
+          this.$api.post(getchildcategoryList, {
+            cid: cid || this.allData[0].cid
+          }), // 二三级类目
+          this.$api.get(advertisement, {
+            params: { cid: cid || this.allData[0].cid }
+          }), // 广告
+          this.$api.get(recommendation, {
+            params: { cid: cid || this.allData[0].cid }
+          })
+        ])
+        .then(
+          axios.spread((childList, advertisementList, recommendationList) => {
+            this.childData = childList.data.result
+            console.log(this.childData, 'this.childData')
+            this.advertisementData = this.randomAdvertisementData(
+              advertisementList.data.result
+            )
+            this.recommendationData = recommendationList.data.result
+          })
+        )
     })
   },
+  mounted() {
+    document.documentElement.scrollTop = document.body.scrollTop = 0
+  },
   methods: {
-    changeTable(cid, index) {
-      if (this.tabIndex === index) return
-      this.tabIndex = index
-      this.clid = cid
+    randomAdvertisementData(data) {
+      if (data.length === 0) return {}
+      const index = Math.floor(Math.random() * (0 + data.length))
+      return data[index]
+    },
+    getData(data) {
+      this.childData = data.childData
+      this.advertisementData = this.randomAdvertisementData(
+        data.advertisementData
+      )
+      this.recommendationData = data.recommendationData
+    },
+    index(i) {
+      this.allData.index = i
     }
   }
 }
 </script>
-<style scoped lang="less">
-.aside {
-  width: 100px;
-  background: rgba(255, 255, 255, 1);
-  height: auto;
-  overflow: hidden;
-  .aside-content {
-    padding: 10px 0;
-    width: 70px;
-
-    position: absolute;
-    overflow: hidden;
-    ul {
-      padding: 0 0 10px 0;
-      background-color: #fff;
-      display: block;
-      overflow: hidden;
-    }
-    ul li {
-      padding: 3px 5px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-      white-space: nowrap; /*超出的空白区域不换行*/
-      overflow: hidden; /*超出隐藏*/
-      height: 32px;
-      font-size: 14px;
-      font-family: PingFangSC-Regular, PingFang SC;
-      font-weight: 400;
-      color: rgba(90, 90, 90, 1);
-      line-height: 32px;
-    }
-  }
-  .aside-content a {
-    display: block;
-  }
-}
-.aside ul li .active {
-  font-size: 15px;
-  // color: rgba(255, 77, 79, 1);
-}
-.aside ul li .tips {
-  color: #fff;
-  background-color: rgba(255, 77, 79, 1);
-  width: 60px;
-  height: 24px;
-  line-height: 24px;
-  margin: 11px auto;
-  border-radius: 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-</style>
+<style scoped lang="less"></style>
