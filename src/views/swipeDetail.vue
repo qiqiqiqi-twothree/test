@@ -15,44 +15,28 @@
           <span>立即抢购></span>
         </div>
       </div>
+       <div class="sticky">
+      <p>我是固定的哟</p>
+    </div>
       <div class="goods-content" :class="{ 'goods-content-spring': isSpring }">
         <div class="goods-list" ref="goodsList" @scroll="handleBarScroll">
-          <div
-            class="list-item"
-            v-for="(item, index) in hotGoods"
-            :key="index"
-            ref="li"
-          >
+          <div class="list-item" v-for="(item, index) in hotGoods" :key="index" ref="li">
             <img class="item-img" src="../assets/nav/0.png" />
             <span class="item-title">{{ itemtitle }}</span>
             <span class="item-price">￥{{ itemprice }}</span>
           </div>
         </div>
-        <span
-          class="scroll-button"
-          ref="bar"
-          :class="{ 'scroll-button-spring': isSpring }"
-        >
-          <span
-            class="scroll-inner"
-            ref="inner"
-            :class="{ 'scroll-inner-spring': isSpring }"
-          ></span>
+        <span class="scroll-button" ref="bar" :class="{ 'scroll-button-spring': isSpring }">
+          <span class="scroll-inner" ref="inner" :class="{ 'scroll-inner-spring': isSpring }"></span>
         </span>
       </div>
     </div>
-
+   
     <van-sticky :offset-top="20">
       <div class="title-list">
         <div class="title-list-all">
           <van-tabs>
-            <van-tab
-              v-for="(item, index) in titleTop"
-              :key="index"
-              :title="item.a"
-            >
-              {{ index }}
-            </van-tab>
+            <van-tab v-for="(item, index) in titleTop" :key="index" :title="item.a">{{ index }}</van-tab>
           </van-tabs>
         </div>
       </div>
@@ -75,27 +59,14 @@
       </div>
       <div class="goods-content" :class="{ 'goods-content-spring': isSpring }">
         <div class="goods-list" ref="goodsList" @scroll="handleBarScroll">
-          <div
-            class="list-item"
-            v-for="(item, index) in hotGoods"
-            :key="index"
-            ref="li"
-          >
+          <div class="list-item" v-for="(item, index) in hotGoods" :key="index" ref="li">
             <img class="item-img" src="../assets/nav/0.png" />
             <span class="item-title">{{ itemtitle }}</span>
             <span class="item-price">￥{{ itemprice }}</span>
           </div>
         </div>
-        <span
-          class="scroll-button"
-          ref="bar"
-          :class="{ 'scroll-button-spring': isSpring }"
-        >
-          <span
-            class="scroll-inner"
-            ref="inner"
-            :class="{ 'scroll-inner-spring': isSpring }"
-          ></span>
+        <span class="scroll-button" ref="bar" :class="{ 'scroll-button-spring': isSpring }">
+          <span class="scroll-inner" ref="inner" :class="{ 'scroll-inner-spring': isSpring }"></span>
         </span>
       </div>
     </div>
@@ -116,27 +87,14 @@
       </div>
       <div class="goods-content" :class="{ 'goods-content-spring': isSpring }">
         <div class="goods-list" ref="goodsList" @scroll="handleBarScroll">
-          <div
-            class="list-item"
-            v-for="(item, index) in hotGoods"
-            :key="index"
-            ref="li"
-          >
+          <div class="list-item" v-for="(item, index) in hotGoods" :key="index" ref="li">
             <img class="item-img" src="../assets/nav/0.png" />
             <span class="item-title">{{ itemtitle }}</span>
             <span class="item-price">￥{{ itemprice }}</span>
           </div>
         </div>
-        <span
-          class="scroll-button"
-          ref="bar"
-          :class="{ 'scroll-button-spring': isSpring }"
-        >
-          <span
-            class="scroll-inner"
-            ref="inner"
-            :class="{ 'scroll-inner-spring': isSpring }"
-          ></span>
+        <span class="scroll-button" ref="bar" :class="{ 'scroll-button-spring': isSpring }">
+          <span class="scroll-inner" ref="inner" :class="{ 'scroll-inner-spring': isSpring }"></span>
         </span>
       </div>
     </div>
@@ -157,27 +115,14 @@
       </div>
       <div class="goods-content" :class="{ 'goods-content-spring': isSpring }">
         <div class="goods-list" ref="goodsList" @scroll="handleBarScroll">
-          <div
-            class="list-item"
-            v-for="(item, index) in hotGoods"
-            :key="index"
-            ref="li"
-          >
+          <div class="list-item" v-for="(item, index) in hotGoods" :key="index" ref="li">
             <img class="item-img" src="../assets/nav/0.png" />
             <span class="item-title">{{ itemtitle }}</span>
             <span class="item-price">￥{{ itemprice }}</span>
           </div>
         </div>
-        <span
-          class="scroll-button"
-          ref="bar"
-          :class="{ 'scroll-button-spring': isSpring }"
-        >
-          <span
-            class="scroll-inner"
-            ref="inner"
-            :class="{ 'scroll-inner-spring': isSpring }"
-          ></span>
+        <span class="scroll-button" ref="bar" :class="{ 'scroll-button-spring': isSpring }">
+          <span class="scroll-inner" ref="inner" :class="{ 'scroll-inner-spring': isSpring }"></span>
         </span>
       </div>
     </div>
@@ -198,77 +143,29 @@
       </div>
       <div class="goods-content" :class="{ 'goods-content-spring': isSpring }">
         <div class="goods-list" ref="goodsList" @scroll="handleBarScroll">
-          <div
-            class="list-item"
-            v-for="(item, index) in hotGoods"
-            :key="index"
-            ref="li"
-          >
+          <div class="list-item" v-for="(item, index) in hotGoods" :key="index" ref="li">
             <img class="item-img" src="../assets/nav/0.png" />
             <span class="item-title">{{ itemtitle }}</span>
             <span class="item-price">￥{{ itemprice }}</span>
           </div>
         </div>
-        <span
-          class="scroll-button"
-          ref="bar"
-          :class="{ 'scroll-button-spring': isSpring }"
-        >
-          <span
-            class="scroll-inner"
-            ref="inner"
-            :class="{ 'scroll-inner-spring': isSpring }"
-          ></span>
+        <span class="scroll-button" ref="bar" :class="{ 'scroll-button-spring': isSpring }">
+          <span class="scroll-inner" ref="inner" :class="{ 'scroll-inner-spring': isSpring }"></span>
         </span>
       </div>
     </div>
-    <div class="title-bar">
-      <div class="title-bar-top">
-        <div class="title-bar-top-icon">
-          <img src="../assets/img/forgoodicon@2x.png" />
-        </div>
-        <div class="title-bar-top-text-large">
-          <span>店主爆款推荐</span>
-        </div>
-        <div class="title-bar-top-text-small">
-          <span>精品好礼任意选</span>
-        </div>
-        <div class="title-bar-top-text-more">
-          <span>立即抢购></span>
-        </div>
-      </div>
-      <div class="goods-content" :class="{ 'goods-content-spring': isSpring }">
-        <div class="goods-list" ref="goodsList" @scroll="handleBarScroll">
-          <div
-            class="list-item"
-            v-for="(item, index) in hotGoods"
-            :key="index"
-            ref="li"
-          >
-            <img class="item-img" src="../assets/nav/0.png" />
-            <span class="item-title">{{ itemtitle }}</span>
-            <span class="item-price">￥{{ itemprice }}</span>
-          </div>
-        </div>
-        <span
-          class="scroll-button"
-          ref="bar"
-          :class="{ 'scroll-button-spring': isSpring }"
-        >
-          <span
-            class="scroll-inner"
-            ref="inner"
-            :class="{ 'scroll-inner-spring': isSpring }"
-          ></span>
-        </span>
-      </div>
-    </div>
+    <v-footer></v-footer>
   </div>
 </template>
 
 <script>
 import { getRecShopList } from '@/http/mock.js'
+import footer from '../components/index/footer.vue'
 export default {
+  components: {
+    'v-footer': footer
+  },
+
   data() {
     return {
       titleTop: [
@@ -340,7 +237,7 @@ export default {
 <style lang="less">
 //foor楼层
 .van-sticky {
-  margin-top: 10px;
+  margin-top: 30px;
 }
 .van-tabs__nav {
   background-color: rgb(224, 224, 224);
@@ -378,8 +275,17 @@ export default {
   }
 }
 .rec-goods {
+  .sticky {
+    background-color: rgb(230, 230, 220);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    z-index: 10;
+  }
+
   margin-bottom: 10px;
-  height: 220px;
+  // height: 220px;
+  height: auto;
   border-radius: 8px;
   background-image: url('../assets/img/background@2x.png');
   background-size: 100% 100%;

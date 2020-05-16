@@ -33,7 +33,7 @@ export default {
   },
   created() {
     this.$api.post(getMallNewsflash).then(res => {
-      console.log(res)
+      // console.log(res)
       this.newNotice = res.data.result
     })
   }
@@ -41,18 +41,20 @@ export default {
 </script>
 <style scoped lang="less">
 .notice-wrapper {
-  width: 355px;
+  width:100%;
   height: 30px;
   background: #fff;
-  margin: 12px 10px 8px -60px;
+  // margin: 12px 10px 8px -60px;
+
   border-radius: 8px;
 
   .notice {
     background-color: blanchedalmond;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     height: 30px;
-    margin: 0 10px;
+    // margin: 0 10px;
   }
 
   .notice-title {

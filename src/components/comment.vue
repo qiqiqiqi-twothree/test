@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button>分类</button>
+    <button>评价</button>
 
     <!-- <span></span>
     <el-input v-model="demo"></el-input>

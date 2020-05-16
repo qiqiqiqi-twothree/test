@@ -9,13 +9,12 @@
         </div>
       </div>
     </div>
+    <div class="sticky">
+      <span>嘻嘻嘻嘻嘻嘻</span>
+    </div>
     <!-- 每日资讯 -->
     <div v-if="gotolist" class="detailBar">
-      <div
-        v-for="list in getList"
-        :key="list.id"
-        @click="gotoNoticedetail_list(list)"
-      >
+      <div v-for="list in getList" :key="list.id" @click="gotoNoticedetail_list(list)">
         <div class="deatilBar_info">
           <div class="deatilBar_updatatime">
             <div class="deatilBar_updatatime_determined">
@@ -43,10 +42,7 @@
                   <h1>{{ list.title }}</h1>
                 </div>
                 <div class="detailBar_artical_table_script_text">
-                  <div
-                    class="detail"
-                    v-html="list.details.replace(/<\/?.+?\/?>/g, '')"
-                  ></div>
+                  <div class="detail" v-html="list.details.replace(/<\/?.+?\/?>/g, '')"></div>
 
                   <!-- <p v-html="list.details"></p> -->
                 </div>
@@ -139,7 +135,17 @@ export default {
 }
 </script>
 <style scoped lang="less">
+
 .watchDetail {
+  .sticky {
+  background-color: beige;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 30px;
+  padding: 5px;
+   z-index: 10;
+
+}
   .titleBar {
     background: rgba(255, 77, 79, 1);
     width: 100%;

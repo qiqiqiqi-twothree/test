@@ -42,29 +42,34 @@
       </van-swipe>
     </div> -->
     </div>
-    <div class="icons">
-      <ul class="icons-list">
-        <li class="icons-grid" v-for="(item, index) in items" :key="index.id">
-          <img class="img-des" src="../assets/1.png" />
-          <p>{{ item.title }}</p>
-        </li>
-      </ul>
-    </div>
+    
+    <v-nav :navData="items"></v-nav>
+    <v-notice @click.native="gotoNotice"></v-notice>
+    <v-area></v-area>
   </div>
 </template>
 <script>
+import Nav from '@/components/index/icons.vue'
+import Notice from '@/components/Watch.vue'
+import Area from '@/components/area.vue'
 import Vue from 'vue'
 import { Swipe, SwipeItem, Toast } from 'vant'
 Vue.use(Swipe)
   .use(SwipeItem)
   .use(Toast)
-import { getFloorList } from '@/http/mock.js'
+import { getFloorList,getShortcutlist } from '@/http/mock.js'
 
 export default {
-  name: 'index',
+  components: {
+    'v-nav': Nav,
+    'v-notice': Notice,
+    'v-area': Area
+  },
   data() {
     return {
-      items: [],
+      nav: true,
+      // navData:'',
+      items:'',
       images: [
         'https://img.yzcdn.cn/vant/apple-1.jpg',
         'https://img.yzcdn.cn/vant/apple-2.jpg'
@@ -74,19 +79,43 @@ export default {
 
   mounted() {},
   created() {
-    // this.map();
     this.$api
-      .get(getFloorList, {
+      .get(getShortcutlist, {
         params: {
-          // cityRegionCode,
-          pageType: 1
+          type: 2,
+          page: 1
         }
       })
-      .then(res => {
-        console.log(res, 123)
-        this.items = res.data.result.commonFloor
+      .then(navList => {
+        // console.log(navList,123456)
+        const temp = navList.data.result
+        // console.log(temp,2222)
+
+
+        temp.forEach((item, index) => {
+          item.iconLink = item.iconLink.replace(/#/, '')
+        })
+        this.items = temp
+        // console.log(temp,122222)
+        // console.log(this.items,122222)
+
       })
-    // Toast('你好呀')
+
+    // // this.map();
+    // this.$api
+    //   .get(getFloorList, {
+    //     params: {
+    //       // cityRegionCode,
+    //       pageType: 1
+    //     }
+    //   })
+    //   .then(res => {
+    //     console.log(res, 123)
+    //     if (res.data.code == 200) {
+    //       this.items = res.data.result.commonFloor.slice(0, 10) //创建选中的子数组
+    //     }
+    //   })
+    // // Toast('你好呀')
   },
   methods: {
     goBack() {
@@ -98,9 +127,12 @@ export default {
     search() {
       Toast('你好呀')
     },
+    gotoNotice() {
+      this.$router.push('/watchDetail')
+    }
     // map(array, func) {
     //   var res = []
-    //   for (var i = 0; i < array.length; i++) 
+    //   for (var i = 0; i < array.length; i++)
     //   res.push(func(array[i]))
     // }
   }
@@ -212,6 +244,9 @@ export default {
       color: rgba(34, 34, 34, 1);
       line-height: 10px;
       height: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

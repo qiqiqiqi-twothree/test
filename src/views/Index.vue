@@ -5,7 +5,7 @@
         <!-- <span>中国大陆</span> -->
         <van-dropdown-menu>
           <van-dropdown-item v-model="value1" :options="option1" />
-          <span class="ora">亲，请登录</span>
+          <span class="ora" @click="login()">亲，请登录</span>
           <span>免费注册</span>
         </van-dropdown-menu>
       </div>
@@ -43,16 +43,9 @@
     </div>
     <div class="site-body">
       <div class="search">
-        <img
-          src="https://gw.alicdn.com/tfs/TB1o2XHsHj1gK0jSZFuXXcrHpXa-190-140.gif"
-        />
-        <van-search
-          class="search-in"
-          placeholder="请输入搜索关键词"
-          shape="round"
-          show-action
-          shap="round"
-        >
+        <img src="https://gw.alicdn.com/tfs/TB1o2XHsHj1gK0jSZFuXXcrHpXa-190-140.gif" />
+        <img src="http://5b0988e595225.cdn.sohucs.com/images/20181125/e521e3a87edc45c7a3bee380e4a4da7b.gif" />
+        <van-search class="search-in" placeholder="请输入搜索关键词" shape="round" show-action shap="round">
           <van-button type="default" slot="action">搜索</van-button>
         </van-search>
       </div>
@@ -68,7 +61,11 @@
       <div class="butt">
         <v-aside @click.native="gotoAside"></v-aside>
       </div>
+      <div class="butt">
+        <v-comment @click.native="gotoComment"></v-comment>
+      </div>
     </div>
+
     <el-input v-model="demo" />
     <p>{{ value }}</p>
   </div>
@@ -80,13 +77,15 @@ import watch from '../components/Watch.vue'
 import swipe from '../components/swipe.vue'
 import top from '../components/top.vue'
 import aside from '../components/aside.vue'
+import comment from '../components/comment.vue'
 
 export default {
   components: {
     'v-watch': watch,
     'v-swipe': swipe,
     'v-top': top,
-    'v-aside': aside
+    'v-aside': aside,
+    'v-comment': comment
   },
   data() {
     return {
@@ -103,14 +102,13 @@ export default {
         { text: '韩国', value: 6 },
         { text: '澳大利亚', value: 7 }
       ],
-      login: '进入登陆页面',
       navimages: [
-        // { src: require("../assets/nav/0.png") },
-        // { src: require("../assets/nav/1.png") },
-        // { src: require("../assets/nav/2.png") },
-        // { src: require("../assets/nav/3.png") },
-        // { src: require("../assets/nav/4.png") },
-        // { src: require("../assets/nav/5.png") }
+        // { src: require('../assets/nav/0.png') },
+        // { src: require('../assets/nav/1.png') },
+        // { src: require('../assets/nav/2.png') },
+        // { src: require('../assets/nav/3.png') },
+        // { src: require('../assets/nav/4.png') },
+        // { src: require('../assets/nav/5.png') }
       ],
       item_one: null,
       item_two: null,
@@ -120,6 +118,9 @@ export default {
   },
 
   methods: {
+    login() {
+      this.$router.push({ path: '/login' })
+    },
     firstLogin() {
       this.$router.push({ path: '/home' })
     },
@@ -134,6 +135,9 @@ export default {
     },
     gotoAside() {
       this.$router.push({ path: '/category' })
+    },
+    gotoComment() {
+      this.$router.push({ path: '/comment' })
     }
   },
   watch: {
