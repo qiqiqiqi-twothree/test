@@ -1,13 +1,18 @@
 <template lang="html">
   <div class="evaStar">
+    <div style='background-color:blue'  @click="$router.push('/')">
+    <p>sajdgf</p>
+    </div>
+
     <div class="model_rate">
       <div class="model_title">
+
         <label class="model_rate_name">商品评分：</label>
         <span class="model_rate_value">
           <v-start></v-start>
         </span>
       </div>
-      <div class="model_title">   
+      <div class="model_title">
       <label class="model_rate_name">描述相符评分：</label>
         <span class="model_rate_value">
           <v-start></v-start>
@@ -25,6 +30,10 @@
           <v-start></v-start>
         </span>
       </div>
+ <div>
+      <P @click="showconfirm">点击我就有弹窗</P>
+    </div>
+
       <i></i>
       <div class="manual" @click="getColor">
         <p>ydsgfdrys</p>
@@ -35,7 +44,7 @@
       </div>
     </div>
     <div>
-      <input 
+      <input
         class="ng-pristine ng-valid ng-empty ng-touched"
         id="input_search"
         style
@@ -44,19 +53,63 @@
       />
       <p>{{associateWords}} fghfg</p>
     </div>
+    <div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+      <div class="grid">
+        <van-uploader v-model="fileList" multiple />
+      </div>
+    </div>
+
+    <div class="search-top">
+      <div @click="returnTop" class="search-top-scroll" :class="{'hidden':!toTop}" >
+        <img src="../assets/img/shop_top@2x.png"/>
+      </div>
+    </div>
+
   </div>
 </template>
 <script>
 import Start from '@/components/start.vue'
+import { Icon, Uploader, Dialog } from 'vant'
+
 export default {
   components: {
-    'v-start': Start
+    'v-start': Start,
+    [Icon.name]: Icon
   },
   data() {
     return {
       isActive: false,
       isShow: true,
-      name: ''
+      fileList: [],
+      toTop: false //回到顶部按钮,
+
     }
   },
   computed: {
@@ -71,43 +124,96 @@ export default {
       }
     }
   },
+  mounted() {
+    // 监听滚动事件
+    window.addEventListener('scroll', this.handleScroll)
+  },
   methods: {
+    showconfirm() {
+      // Dialog.confirm({
+      //   title: '温馨提示',
+      //   message:
+      //     '本次购买商品将在5月30号至6月1号参与格力电器6.1直播活动，届时将有较大优惠，您可稍后购买',
+      //   cancelButtonText: '我在看看',
+      //   confirmButtonText: '继续购买'
+      // })
+      //   .then(() => {
+      //     // on confirm
+      //   })
+      //   .catch(() => {
+      //     this.$router.go(-1)
+      //     // on cancel
+      //   })
+      // Dialog.confirm({
+      //   title: '温馨提示',
+      //   message: '本次购买的商品在六月一号会有较大优惠，您可稍后购买',
+      //   confirmButtonText:'继续购买',
+      //   cancelButtonText:'我再看看',
+      // })
+      //   .then(() => {
+      //     // on confirm
+      //   })
+      //   .catch(() => {
+      //     // on cancel
+      //   })
+    },
     getColor() {
       ;(this.isShow = !this.isShow), (this.isActive = !this.isActive)
+    },
+    // 返回顶部
+    returnTop() {
+      let top = document.documentElement.scrollTop || document.body.scrollTop
+      const step = top / 20
+      ;(function Up() {
+        if (top > 10) {
+          top -= step
+          document.documentElement.scrollTop = document.body.scrollTop = top
+          setTimeout(Up, 5)
+        } else {
+          document.documentElement.scrollTop = document.body.scrollTop = 0
+        }
+      })()
+    },
+    // 滚动条监听事件
+    handleScroll() {
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+      console.log(document.documentElement.scrollTop, 111)
+      console.log(document.body.scrollTop, 222)
+      console.log(scrollTop, 333)
+      this.toTop = scrollTop >= 400
+    },
+    beforeDestroy() {
+      // 移除滚动条事件
+      window.removeEventListener('scroll', this.handleScroll)
     }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    console.log(123)
+    // next()
   }
 }
 </script>
 <style scoped lang="less">
-//   i:after{
-//       content:'';
-//       position: absolute;
-//       display: block;
-//       top: 50%;
-//       left: 50%;
-//       width: 32px;
-//       height: 32px;
-//       margin-top: -16px;
-//       margin-left: -16px;
-//       background: url("../../assets/icon/play.png") no-repeat;
-//       background-size: cover;
-//       z-index: 5;
-// }
-
-    
-//     i:before {
-//       content: "";
-//       position: absolute;
-//       display: block;
-//       border-radius: 7px;
-//       top: 0;
-//       left: 0;
-//       width: 100%;
-//       height: 100%;
-//       background-color: rgba(0, 0, 0, 0.5);
-//       z-index: 1;
-//     }
-
+// 回到顶部按钮
+.search-top {
+  position: fixed;
+  bottom: 0px;
+  right: 5px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  .search-top-scroll {
+    width: 36px;
+    height: 36px;
+    transition: height 0.2s ease;
+    -webkit-transition: height 0.2s ease;
+  }
+  .hidden {
+    height: 0;
+  }
+}
 
 .evaStar {
   width: 100%;
@@ -137,32 +243,6 @@ export default {
       position: absolute;
 
       background-color: rgb(233, 153, 233);
-      //  -webkit-clip-path: polygon(
-      //   50% 0%,
-      //   61% 35%,
-      //   98% 35%,
-      //   68% 57%,
-      //   79% 91%,
-      //   50% 70%,
-      //   21% 91%,
-      //   32% 57%,
-      //   2% 35%,
-      //   39% 35%
-      // );
-      // clip-path: polygon(
-      //   50% 0%,
-      //   61% 35%,
-      //   98% 35%,
-      //   68% 57%,
-      //   79% 91%,
-      //   50% 70%,
-      //   21% 91%,
-      //   32% 57%,
-      //   2% 35%,
-      //   39% 35%
-      // );
-      // -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%);
-      // clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%);
     }
 
     //trans
@@ -242,48 +322,54 @@ export default {
       );
     }
   }
-}
-
-.active {
-  background-color: rgb(250, 252, 121);
-  position: relative;
-  animation: mymove 5s infinite;
-  -moz-animation: mymove 5s infinite; /* Firefox */
-  -webkit-animation: mymove 5s infinite; /* Safari and Chrome */
-  -o-animation: mymove 5s infinite; /* Opera */
-  @keyframes mymove {
-    from {
-      left: 0px;
-    }
-    to {
-      left: 24px;
-    }
+  .grid {
+    // background-color: cornflowerblue;
+    display: grid;
+    grid-template-columns: repeat(3, 33.33%);
+    grid-template-rows: 90px 90px;
   }
 
-  @-moz-keyframes mymove /* Firefox */ {
-    from {
-      left: 0px;
+  .active {
+    background-color: rgb(250, 252, 121);
+    position: relative;
+    animation: mymove 5s infinite;
+    -moz-animation: mymove 5s infinite; /* Firefox */
+    -webkit-animation: mymove 5s infinite; /* Safari and Chrome */
+    -o-animation: mymove 5s infinite; /* Opera */
+    @keyframes mymove {
+      from {
+        left: 0px;
+      }
+      to {
+        left: 24px;
+      }
     }
-    to {
-      left: 24px;
-    }
-  }
 
-  @-webkit-keyframes mymove /* Safari and Chrome */ {
-    from {
-      left: 0px;
+    @-moz-keyframes mymove /* Firefox */ {
+      from {
+        left: 0px;
+      }
+      to {
+        left: 24px;
+      }
     }
-    to {
-      left: 24px;
-    }
-  }
 
-  @-o-keyframes mymove /* Opera */ {
-    from {
-      left: 0px;
+    @-webkit-keyframes mymove /* Safari and Chrome */ {
+      from {
+        left: 0px;
+      }
+      to {
+        left: 24px;
+      }
     }
-    to {
-      left: 24px;
+
+    @-o-keyframes mymove /* Opera */ {
+      from {
+        left: 0px;
+      }
+      to {
+        left: 24px;
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 export const pic_url = 'http://premall.gree.com:8080' //图片路径
 
-// export const baseUrl = 'https://apishyun.gree.com/extenal-app-guangfopg'
+export const baseUrl = 'https://apishyun.gree.com/extenal-app-guangfopg'
 
 export const getLogin = 'login' // 登录
 

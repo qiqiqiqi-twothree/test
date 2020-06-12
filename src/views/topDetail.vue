@@ -42,10 +42,15 @@
       </van-swipe>
     </div> -->
     </div>
-    
+
     <v-nav :navData="items"></v-nav>
     <v-notice @click.native="gotoNotice"></v-notice>
     <v-area></v-area>
+    <van-tabs v-model="active" scrollspy sticky>
+  <van-tab v-for="index in 8" :title="'选项 ' + index">
+    内容 {{ index }}
+  </van-tab>
+</van-tabs>
   </div>
 </template>
 <script>
@@ -53,23 +58,25 @@ import Nav from '@/components/index/icons.vue'
 import Notice from '@/components/Watch.vue'
 import Area from '@/components/area.vue'
 import Vue from 'vue'
-import { Swipe, SwipeItem, Toast } from 'vant'
-Vue.use(Swipe)
-  .use(SwipeItem)
-  .use(Toast)
-import { getFloorList,getShortcutlist } from '@/http/mock.js'
+import { Swipe, SwipeItem, Toast, Tab, Tabs } from 'vant'
+import { getFloorList, getShortcutlist } from '@/http/mock.js'
 
 export default {
   components: {
     'v-nav': Nav,
     'v-notice': Notice,
-    'v-area': Area
+    'v-area': Area,
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem,
+    [Toast.name]: Toast,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs
   },
   data() {
     return {
       nav: true,
       // navData:'',
-      items:'',
+      items: '',
       images: [
         'https://img.yzcdn.cn/vant/apple-1.jpg',
         'https://img.yzcdn.cn/vant/apple-2.jpg'
@@ -91,14 +98,12 @@ export default {
         const temp = navList.data.result
         // console.log(temp,2222)
 
-
         temp.forEach((item, index) => {
           item.iconLink = item.iconLink.replace(/#/, '')
         })
         this.items = temp
         // console.log(temp,122222)
         // console.log(this.items,122222)
-
       })
 
     // // this.map();

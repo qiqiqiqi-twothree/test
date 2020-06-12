@@ -4,8 +4,14 @@
       <div class="nav-bd-l">
         <!-- <span>中国大陆</span> -->
         <van-dropdown-menu>
-          <van-dropdown-item v-model="value1" :options="option1" />
-          <span class="ora" @click="login()">亲，请登录</span>
+          <van-dropdown-item
+            :options="option1"
+            v-model="value1"
+          />
+          <span
+            @click="login()"
+            class="ora"
+          >亲，请登录</span>
           <span>免费注册</span>
         </van-dropdown-menu>
       </div>
@@ -36,7 +42,10 @@
     </div>
     <div class="site-nav-bd2">
       <div class="navimage">
-        <div v-for="(item, index) in navimages" :key="index">
+        <div
+          :key="index"
+          v-for="(item, index) in navimages"
+        >
           <img v-lazy="item.src" />
         </div>
       </div>
@@ -44,9 +53,21 @@
     <div class="site-body">
       <div class="search">
         <img src="https://gw.alicdn.com/tfs/TB1o2XHsHj1gK0jSZFuXXcrHpXa-190-140.gif" />
-        <img src="http://5b0988e595225.cdn.sohucs.com/images/20181125/e521e3a87edc45c7a3bee380e4a4da7b.gif" />
-        <van-search class="search-in" placeholder="请输入搜索关键词" shape="round" show-action shap="round">
-          <van-button type="default" slot="action">搜索</van-button>
+        <img
+          src="http://5b0988e595225.cdn.sohucs.com/images/20181125/e521e3a87edc45c7a3bee380e4a4da7b.gif"
+          style="width:150px;height:150px"
+        />
+        <van-search
+          class="search-in"
+          placeholder="请输入搜索关键词"
+          shap="round"
+          shape="round"
+          show-action
+        >
+          <van-button
+            slot="action"
+            type="default"
+          >搜索</van-button>
         </van-search>
       </div>
       <div class="butt">
@@ -65,9 +86,20 @@
         <v-comment @click.native="gotoComment"></v-comment>
       </div>
     </div>
-
+    <div class="voiceAssist">
+      <div
+        @click="gotoVoice"
+        class="voiceAssist-img"
+      >
+        <img
+          alt
+          src="../assets/img/voice_assistant/assistant_icon@2x.png"
+        />
+      </div>
+    </div>
     <el-input v-model="demo" />
     <p>{{ value }}</p>
+   
   </div>
 </template>
 
@@ -78,6 +110,7 @@ import swipe from '../components/swipe.vue'
 import top from '../components/top.vue'
 import aside from '../components/aside.vue'
 import comment from '../components/comment.vue'
+import Dialog from 'vant'
 
 export default {
   components: {
@@ -138,6 +171,35 @@ export default {
     },
     gotoComment() {
       this.$router.push({ path: '/comment' })
+    },
+    gotoVoice() {
+      this.$router.push('/voiceAssist')
+    },
+    showconfirm() {
+      this.$dialog.confirm({
+              title: '温馨提示',
+              message: '本次购买商品将在5月30号至6月1号参与格力电器6.1直播活动，届时将有较大优惠，您可稍后购买',
+              cancelButtonText: '我在看看',
+              confirmButtonText: '继续购买'
+            })
+              .then(() => {
+                // on confirm
+
+              })
+              .catch(() => {
+                this.$router.go(-1)
+                // on cancel
+              })
+      // this.$dialog.confirm({
+      //   title: '标题',
+      //   message: '弹窗内容'
+      // })
+      //   .then(() => {
+      //     // on confirm
+      //   })
+      //   .catch(() => {
+      //     // on cancel
+      //   })
     }
   },
   watch: {
@@ -221,6 +283,19 @@ export default {
     margin: 0 10px;
     line-height: 48px;
     font-weight: 100px;
+  }
+}
+.voiceAssist {
+  position: fixed;
+  left: 38px;
+  bottom: 160px;
+  z-index: 99;
+  width: 20px;
+  &-img {
+    width: 60px;
+    img {
+      width: 100%;
+    }
   }
 }
 </style>

@@ -10,6 +10,7 @@ const swipeDetail = () => import('@/views/swipeDetail.vue')
 const topDetail = () => import('@/views/topDetail.vue')
 const category = () => import('@/views/category.vue') //分类
 const comment = () => import('@/views/comment.vue')
+const voiceAssist = () => import('@/components/voiceAssist/voiceAssist.vue')
 
 Vue.use(VueRouter)
 
@@ -53,7 +54,12 @@ const routes = [
     path: '/comment',
     name: '评论',
     component: comment
-  }
+  },
+  {
+    path: '/voiceAssist',
+    name: '语音助手',
+    component: voiceAssist
+  },
 ]
 
 const router = new VueRouter({
