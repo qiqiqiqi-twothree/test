@@ -99,7 +99,7 @@
     </div>
     <el-input v-model="demo" />
     <p>{{ value }}</p>
-   
+
   </div>
 </template>
 
